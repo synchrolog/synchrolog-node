@@ -1,0 +1,25 @@
+{
+  "name": "synchrolog-node",
+  "version": "1.0.0",
+  "description": "Node library for Synchrolog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/synchrolog/synchrolog-node.git"
+  },
+  "author": "Roberto C. Rivera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/synchrolog/synchrolog-node/issues"
+  },
+  "homepage": "https://github.com/synchrolog/synchrolog-node#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "morgan": "^1.9.1",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
+  }
+}
