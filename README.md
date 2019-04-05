@@ -7,13 +7,24 @@ $ npm install git://github.com/synchrolog/synchrolog-node.git
 ```
 
 ## Usage
+Format the log messages the same way as Morgan https://github.com/expressjs/morgan#morganformat-options
 
 ```js
 const synchrolog = require('synchrolog-node');
 
 // Initialize your express app, and pass the app to the synchrolog module
 var app = express();
-synchrolog(app, 'YOUR_API_KEY');
+
+synchrolog(app, 'YOUR_API_KEY', 'combined');
+synchrolog(app, 'YOUR_API_KEY', function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+});
+synchrolog(app, 'YOUR_API_KEY', ':remote-addr - :remote-user [:date[clf]] ":method :url');
 ```
 
 ## Contributing
