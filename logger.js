@@ -1,6 +1,6 @@
 var morgan = require('morgan');
 var winston = require('winston');
-var middleware = require('./lib/logger_middleware');
+var middleware = require('./lib/middleware');
 var SynchrologTransport = require('./lib/transport');
 
 var logger = function (app, format) {
