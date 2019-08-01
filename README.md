@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-$ npm install git://github.com/synchrolog/synchrolog-node.git
+$ npm install synchrolog-node
 ```
 
 ## Usage
@@ -18,24 +18,27 @@ const synchrologError = require('synchrolog-node/error');
 // Initialize your express app, and pass the app to the synchrolog module
 var app = express();
 
+// ADD synchrologConfig and synchrologLogger after initializing the express app
 synchrologConfig('YOUR_API_KEY');
 synchrologLogger(app, 'combined');
 
-synchrologLogger(app, 'combined');
-synchrologLogger(app, function (tokens, req, res) {
-  return [
-    tokens.method(req, res),
-    tokens.url(req, res),
-    tokens.status(req, res),
-    tokens['response-time'](req, res), 'ms'
-  ].join(' ')
-});
-synchrologLogger(app, ':remote-addr - :remote-user [:date[clf]] ":method :url');
+// you can also use customized logging formats
+// synchrologLogger(app, function (tokens, req, res) {
+//   return [
+//     tokens.method(req, res),
+//     tokens.url(req, res),
+//     tokens.status(req, res),
+//     tokens['response-time'](req, res), 'ms'
+//   ].join(' ')
+// });
+
+// synchrologLogger(app, ':remote-addr - :remote-user [:date[clf]] ":method :url');
 
 app.get('/', function handler(req, res) {
   throw new Error("Hi! I'm an error!");
 });
 
+// ADD synchrologError right after the routes
 app.use(synchrologError);
 ```
 
