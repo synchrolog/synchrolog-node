@@ -3,9 +3,10 @@ const axios = require('axios');
 
 var errorMiddleware = function (err, req, res, next) {
   try {
-    let firstErrorLine = err.stack.split("\n")[1].match(/\((.*)\)/)[1].split(":");
-    let filePath = firstErrorLine[0];
-    let lineNumber = parseInt(firstErrorLine[1]);
+    let errorLine = err.stack.split("\n")[1];
+    let errorContent = errorLine.substring(errorLine.indexOf("/")).split(":");
+    let filePath = errorContent[0];
+    let lineNumber = parseInt(errorContent[1]);
     var file = fs.readFileSync(filePath, { "encoding": "utf8"});
     var errorLog = {
       event_type: 'error',
